@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Productivity Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / GREETING CARD ===== -->
+  <div class="dashboard">
+
+    <div class="card card--clock" id="clock-card">
+      <div class="clock-left">
+        <p id="greeting" class="greeting">Good Morning!</p>
+        <h2 id="clock-time" class="clock-time">00:00:00 AM</h2>
+        <p id="clock-date" class="clock-date">Monday, January 1</p>
+      </div>
+      <div class="clock-right">
+        <div class="name-row">
+          <input type="text" id="user-name" class="name-input" placeholder="Enter your name…" maxlength="40" aria-label="Your name" />
+          <button class="btn btn--icon" id="save-name" aria-label="Save name">&#10003;</button>
+        </div>
+        <button class="btn btn--theme" id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+      </div>
+    </div>
+
+    <!-- ===== FOCUS TIMER CARD ===== -->
+    <div class="card card--timer" id="timer-card">
+      <h3 class="card-title">Focus Timer</h3>
+      <div class="timer-display-wrap">
+        <h2 id="timer-display" class="timer-display">25:00</h2>
+        <span id="timer-complete" class="timer-badge hidden">Time&rsquo;s up!</span>
+      </div>
+      <div class="timer-duration-row">
+        <label for="timer-minutes" class="timer-label">Set minutes:</label>
+        <input type="number" id="timer-minutes" class="timer-minutes-input" min="1" max="99" value="25" aria-label="Timer duration in minutes" />
+        <button class="btn btn--sm" id="timer-set">Set</button>
+      </div>
+      <div class="timer-controls">
+        <button class="btn btn--primary" id="timer-start">Start</button>
+        <button class="btn" id="timer-pause">Pause</button>
+        <button class="btn" id="timer-reset">Reset</button>
+      </div>
+    </div>
+
+    <!-- ===== TASK MANAGER CARD ===== -->
+    <div class="card card--tasks" id="tasks-card">
+      <div class="card-header-row">
+        <h3 class="card-title">To-Do List</h3>
+        <div class="task-actions">
+          <button class="btn btn--sm" id="sort-tasks">Sort</button>
+        </div>
+      </div>
+      <div class="task-input-row">
+        <input type="text" id="task-input" class="task-input" placeholder="Add a new task…" maxlength="200" aria-label="New task" />
+        <button class="btn btn--primary" id="task-add">Add</button>
+      </div>
+      <p id="task-status" class="status-msg" aria-live="polite"></p>
+      <ul id="task-list" class="task-list" aria-label="Task list"></ul>
+    </div>
+
+    <!-- ===== QUICK LINKS CARD ===== -->
+    <div class="card card--links" id="links-card">
+      <h3 class="card-title">Quick Links</h3>
+      <div class="link-input-row">
+        <input type="text" id="link-name" class="link-input" placeholder="Name" maxlength="100" aria-label="Link name" />
+        <input type="text" id="link-url"  class="link-input" placeholder="https://…"  maxlength="2048" aria-label="Link URL" />
+        <button class="btn btn--primary" id="link-add">Add</button>
+      </div>
+      <p id="link-status" class="status-msg" aria-live="polite"></p>
+      <ul id="link-list" class="link-list" aria-label="Quick links"></ul>
+    </div>
+
+  </div><!-- /.dashboard -->
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+﻿/* ============================================================
+   PERSONAL PRODUCTIVITY DASHBOARD — styles.css
+   Single CSS file per project rules
+   ============================================================ */
+
+/* ---------- CSS CUSTOM PROPERTIES (light theme defaults) --- */
+:root {
+  --bg-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --card-bg:     #ffffff;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  --text-primary:   #1a1a2e;
+  --text-secondary: #555577;
+  --text-muted:     #888899;
+  --border-color:   #e0e0ef;
+  --input-bg:       #f5f5fc;
+  --btn-primary-bg:    #6a11cb;
+  --btn-primary-hover: #5a0db0;
+  --btn-bg:       #ebebf5;
+  --btn-hover:    #dcdcf0;
+  --badge-bg:     #ff6b6b;
+  --badge-text:   #ffffff;
+  --task-done-color: #aaaabb;
+  --link-hover:   #6a11cb;
+  --accent:       #6a11cb;
+  --radius:       16px;
+  --gap:          20px;
+  --transition:   0.25s ease;
+}
+
+/* ---------- DARK THEME ------------------------------------ */
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #1a0533 0%, #0d1b4b 100%);
+  --card-bg:     #1e1e38;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --text-primary:   #e8e8ff;
+  --text-secondary: #aaaacc;
+  --text-muted:     #666688;
+  --border-color:   #333355;
+  --input-bg:       #2a2a4a;
+  --btn-primary-bg:    #7c3aed;
+  --btn-primary-hover: #6d28d9;
+  --btn-bg:       #2a2a4a;
+  --btn-hover:    #333355;
+  --badge-bg:     #ff6b6b;
+  --badge-text:   #ffffff;
+  --task-done-color: #555577;
+  --link-hover:   #a78bfa;
+  --accent:       #a78bfa;
+}
+
+/* ---------- RESET & BASE ---------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-primary);
+  padding: var(--gap);
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ---------- DASHBOARD GRID -------------------------------- */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card--clock {
+    grid-column: 1 / -1;   /* clock spans full width */
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .dashboard {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card--clock {
+    grid-column: 1 / -1;   /* clock still spans full width */
+  }
+}
+
+/* ---------- CARDS ----------------------------------------- */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.card-header-row .card-title { margin-bottom: 0; }
+
+/* ---------- CLOCK CARD ------------------------------------ */
+.card--clock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.greeting {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.clock-time {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.clock-date {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.clock-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.name-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.name-input {
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  width: 180px;
+  transition: border-color var(--transition), background var(--transition);
+}
+.name-input:focus { outline: none; border-color: var(--accent); }
+
+/* ---------- BUTTONS --------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  transition: background var(--transition), color var(--transition), transform 0.1s;
+  white-space: nowrap;
+}
+.btn:hover  { background: var(--btn-hover); }
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  background: var(--btn-primary-bg);
+  color: #fff;
+}
+.btn--primary:hover { background: var(--btn-primary-hover); }
+
+.btn--sm {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+}
+
+.btn--icon {
+  padding: 6px 10px;
+  font-size: 1rem;
+  background: var(--btn-primary-bg);
+  color: #fff;
+  border-radius: 8px;
+}
+.btn--icon:hover { background: var(--btn-primary-hover); }
+
+.btn--theme {
+  font-size: 0.82rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* ---------- TIMER CARD ------------------------------------ */
+.card--timer { text-align: center; }
+
+.timer-display-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.timer-badge {
+  display: inline-block;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.timer-duration-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.timer-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.timer-minutes-input {
+  width: 60px;
+  padding: 5px 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  text-align: center;
+  transition: border-color var(--transition), background var(--transition);
+}
+.timer-minutes-input:focus { outline: none; border-color: var(--accent); }
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- TASKS CARD ------------------------------------ */
+.task-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color var(--transition), background var(--transition);
+}
+.task-input:focus { outline: none; border-color: var(--accent); }
+
+.task-list {
+  list-style: none;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--input-bg);
+  transition: background var(--transition);
+}
+.task-item:hover { background: var(--btn-hover); }
+
+.task-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-item .task-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.task-item.done .task-text {
+  text-decoration: line-through;
+  color: var(--task-done-color);
+}
+
+.task-item .task-edit-input {
+  flex: 1;
+  font-size: 0.9rem;
+  font-family: inherit;
+  padding: 2px 6px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+.task-item .task-edit-input:focus { outline: none; }
+
+.task-item .btn-edit,
+.task-item .btn-save-edit,
+.task-item .btn-delete {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- QUICK LINKS CARD ------------------------------ */
+.link-input-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.link-input {
+  flex: 1;
+  min-width: 100px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color var(--transition), background var(--transition);
+}
+.link-input:focus { outline: none; border-color: var(--accent); }
+
+.link-list {
+  list-style: none;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--input-bg);
+  transition: background var(--transition);
+}
+.link-item:hover { background: var(--btn-hover); }
+
+.link-item a {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+.link-item a:hover { text-decoration: underline; }
+
+.link-item .btn-delete {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- STATUS MESSAGES ------------------------------- */
+.status-msg {
+  font-size: 0.8rem;
+  min-height: 1.1em;
+  margin-bottom: 4px;
+  color: var(--badge-bg);
+}
+.status-msg.success { color: #22c55e; }
+
+/* ---------- UTILITY --------------------------------------- */
+.hidden { display: none !important; }
+
+/* ---------- TASK ACTIONS ---------------------------------- */
+.task-actions { display: flex; gap: 6px; }
+
+/* ---------- SCROLLBAR (subtle) ---------------------------- */
+.task-list::-webkit-scrollbar,
+.link-list::-webkit-scrollbar { width: 4px; }
+.task-list::-webkit-scrollbar-thumb,
+.link-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+/* ---------- MOBILE TWEAKS --------------------------------- */
+@media (max-width: 480px) {
+  .clock-time  { font-size: 2rem; }
+  .timer-display { font-size: 2.6rem; }
+  .card--clock { flex-direction: column; align-items: flex-start; }
+  .clock-right { align-items: flex-start; }
+}
